@@ -1,0 +1,551 @@
+ b<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+</head>
+    <title>Document</title>
+    <style>
+        .word-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-end;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 10px;
+            z-index: 9999;
+        }
+
+        .word {
+            margin: 5px;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-custom {
+      border: none;
+      background-color: transparent;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .btn-custom::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: blue;
+      transform: scaleX(0); /* Изначально полоса невидима */
+      transform-origin: 0 50%; /* Точка начала анимации на левом крае */
+      transition: transform 0.3s ease; /* Анимация изменения scaleX */
+    }
+
+    .btn-custom:hover::before {
+      transform: scaleX(1); /* Расширяем полосу до 100% при наведении */
+    }
+    </style>
+    <style>
+    .custom-button-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .custom-button {
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      position: relative;
+    }
+
+    .custom-button::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: blue;
+      transform: scaleX(0); /* Изначально полоса невидима */
+      transform-origin: 0 50%; /* Точка начала анимации на левом крае */
+      transition: transform 0.3s ease; /* Анимация изменения scaleX */
+    }
+
+    .custom-button:hover::before {
+      transform: scaleX(1); /* Расширяем полосу до 100% при наведении */
+    }
+
+    .custom-divider {
+      flex-grow: 1;
+      height: 2px;
+      background-color: gray; /* Цвет серой линии */
+      margin: 0 10px; /* Расстояние между линиями */
+    }
+  </style>
+    <style>
+    .breadcrumb a {
+      color: #9c9c9c !important; /* Цвет ссылок в "крошках" (синий) */
+    }
+      </style>
+    <style>
+    .half-hidden {
+      max-height: 50px; /* Начальная максимальная высота (половина) */
+      overflow: hidden; /* Скрываем лишний текст */
+      transition: max-height 0.3s ease-in-out; /* Анимация изменения высоты */
+    }
+
+    .full-visible {
+      max-height: none; /* Показываем весь текст */
+    }
+  </style>
+</head>
+<body>
+<div class="container" style="max-width: auto; padding-left: 60px;">
+    <nav class="navbar navbar-expand-lg  fixed-top" style="height: 145px; padding-top: 0.1px; background-color: #ffffff;">
+        <div class="container" style="max-width: auto; height: 145px; padding-bottom: 45px; padding-left: 80px; background-color: #ffffff;">
+            <div class="d-flex">
+                <div>
+                    <img src="picture/logo-short.svg" alt="Логотип" style="margin-left: -5px; "/>
+                </div>
+            <svg class="header__logo-text" version="1.1" id="svg2" style="margin-left: -20px; " xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-1 0 398.2 83.9" style="enable-background:new 0 0 398.2 83.9;" width="381px" height="64px" fill="#000000" xml:space="preserve">
+                <g id="g12" transform="translate(211.1484,32.7559)">
+                    <path class="header__logo-text-letter header__logo-text-letter_6 st0" id="path14" d="M-62.6,10.2l6.2,6.2l6.2-6.2L-56.5,4L-62.6,10.2z"></path>
+                </g>
+        <g id="g16" transform="translate(127.0742,37.7695)">
+                <path class="header__logo-text-letter header__logo-text-letter_2 st0" id="path18" d="M-83.7-1.1h8.8v18.8h7.1V-7.4h-23.1v25.1h7.1V-1.1z"></path>
+            </g>
+        <g class="header__logo-text-letter" id="g20" >
+                <g>
+                    <defs>
+                        <rect id="SVGID_1_" x="-115.4" y="0" width="513.7" height="83.9"></rect>
+                    </defs>
+                    <clipPath id="SVGID_2_">
+                        <use xlink:href="#SVGID_1_" style="overflow:visible;"></use>
+                    </clipPath>
+                    <g id="g22" class="st1">
+                        <g id="g28" transform="translate(153.9414,38.1953)">
+                            <path class="header__logo-text-letter header__logo-text-letter_3 st0" id="path30" d="M-76.9-2c4.1,0,6.7,2.5,6.7,6.8c0,4.1-2.6,6.7-6.7,6.7c-4.1,0-6.6-2.5-6.6-6.7
+                C-83.6,0.5-81-2-76.9-2 M-76.9,17.9c8.4,0,13.7-5.2,13.7-13.1c0-8-5.3-13.2-13.7-13.2c-8.3,0-13.6,5.2-13.6,13.2
+                C-90.6,12.7-85.3,17.9-76.9,17.9"></path>
+                        </g>
+                        <g id="g32" transform="translate(195.9785,22.7617)">
+                            <path class="header__logo-text-letter header__logo-text-letter_5 st0" id="path34" d="M-66.4,32.7h7.2V14h7.8V7.6h-22.8V14h7.8V32.7z"></path>
+                        </g>
+                        <g id="g36" transform="translate(107.7598,20.0898)">
+                            <path class="header__logo-text-letter header__logo-text-letter_1 st0" id="path38" d="M-88.5,38.7c5.5,0,9.6-1.9,13.3-5.3l-4.4-5.9c-2.4,2.5-5.6,3.9-9,3.9
+                c-5.7,0-11.4-3.5-11.4-11.6c0-7.2,4.9-11.6,11.4-11.6c3.1,0,6.7,1.1,9,3.8l4.3-5.6c-3.6-3.6-8.2-5.3-13.3-5.3
+                c-11.7,0-19.4,7.5-19.4,18.8C-107.8,32.7-98.3,38.7-88.5,38.7"></path>
+                        </g>
+                        <g id="g40" transform="translate(177.3672,38.2266)">
+                            <path class="header__logo-text-letter header__logo-text-letter_4 st0" id="path42" d="M-71.1-2.1c4.5,0,6.8,2.3,6.8,6.8c0,4.8-3.2,6.6-6.8,6.6c-1.4,0-2.9-0.3-4.3-0.9V-1.6
+                C-74.2-1.9-73.1-2.1-71.1-2.1 M-75.4,16.7c1.7,0.6,3.5,0.8,5.3,0.8c7.8,0,12.8-5.3,12.8-12.7c0-8.2-5-13.1-13.8-13.1
+                c-4.1,0-7.7,0.6-11.5,1.6v34h7.1C-75.4,27.4-75.4,16.7-75.4,16.7z"></path>
+                        </g>
+                        <g id="g44" transform="translate(280.1602,28.7266)">
+                            <path class="header__logo-text-letter header__logo-text-letter_8 st0" id="path46" d="M-45.4,19.3c-1.6,1.5-4.1,2.3-6.5,2.3c-2.2,0-3.8-0.8-3.8-2.7c0-0.5,0-1.1,0.4-1.7
+                c2.4-0.5,6.8-1,9.9-1.3V19.3z M-38.8,19.7v-9.4c0-6.1-3.6-9.2-10.4-9.2c-3.7,0-8,0.8-11.7,2.6l1.6,5.7c3.3-1.7,6.7-2.3,9.3-2.3
+                c4.3,0,4.6,1.5,4.6,3.2v0.6c-4.7,0.5-10.3,1.1-14.3,1.9c-1.6,2.1-2.1,4.1-2.1,6c0,5.6,4,8.4,9.2,8.4c3.2,0,6.1-0.8,7.9-2.6
+                c1,1.8,2.4,2.5,5,2.5c1.4,0,2.8-0.3,4.1-0.7v-5.2c-1.8,0-2.7,0-2.9-0.1C-38.6,21.1-38.8,20.6-38.8,19.7"></path>
+                        </g>
+                        <g id="g48" transform="translate(353.8203,27.3691)">
+                            <path class="header__logo-text-letter header__logo-text-letter_11 st0" id="path50" d="M-27,22.4V8.8c4.3,0.6,6.5,2.6,6.5,6.8C-20.5,19.7-22.7,21.7-27,22.4 M-40.6,15.6
+                c0-4.2,2.3-6.2,6.7-6.8v13.6C-38.4,21.8-40.6,19.8-40.6,15.6 M-27,2.8v-6.5h-7v6.5c-9.3,0.9-13.6,5.4-13.6,12.7
+                c0,7.3,4.3,11.8,13.6,12.7v6.9h7v-6.9c9.2-0.9,13.4-5.4,13.4-12.7C-13.5,8.2-17.8,3.7-27,2.8"></path>
+                        </g>
+                        <g id="g52" transform="translate(405.2246,42.8477)">
+                            <path class="header__logo-text-letter header__logo-text-letter_13 st0" id="path54" d="M-14.1-12.5v9h-9.1v-9h-7.1v25.1h7.1V3h9.1v9.7H-7v-25.1H-14.1z"></path>
+                        </g>
+                        <g id="g56" transform="translate(378.0605,27.4805)">
+                            <path class="header__logo-text-letter header__logo-text-letter_12 st0" id="path58" d="M-20.9,22.1c-4.1,0-6.7-2.5-6.7-6.7c0-4.1,2.6-6.7,6.7-6.7c4.1,0,6.6,2.5,6.6,6.7
+                C-14.3,19.6-16.9,22.1-20.9,22.1 M-20.9,2.4c-8.4,0-13.7,5.1-13.7,13c0,7.9,5.4,13,13.7,13c8.4,0,13.8-5.1,13.8-13
+                C-7.2,7.5-12.6,2.4-20.9,2.4"></path>
+                        </g>
+                        <g id="g60" transform="translate(300.1797,27.4473)">
+                            <path class="header__logo-text-letter header__logo-text-letter_9 st0" id="path62" d="M-40.4,22.2c-1.4,0-2.9-0.3-4.3-0.9V9.1c1.2-0.3,2.3-0.4,4.4-0.4c4.4,0,6.6,2.3,6.6,6.8
+                C-33.6,20.3-36.8,22.2-40.4,22.2 M-40.3,2.5c-4.1,0-7.7,0.6-11.5,1.6v34h7.1V27.5c1.7,0.6,3.5,0.8,5.3,0.8
+                c7.8,0,12.8-5.3,12.8-12.7C-26.6,7.3-31.7,2.5-40.3,2.5"></path>
+                        </g>
+                        <g id="g64" transform="translate(327.6035,28.7266)">
+                            <path class="header__logo-text-letter header__logo-text-letter_10 st0" id="path66" d="M-33.5,19.3c-1.6,1.5-4.1,2.3-6.6,2.3c-2.1,0-3.7-0.8-3.7-2.7c0-0.5,0.1-1.1,0.4-1.7
+                c2.4-0.5,6.7-1,9.9-1.3V19.3z M-27,19.7v-9.4c0-6.1-3.6-9.2-10.6-9.2c-3.4,0-7.7,0.8-11.5,2.6l1.6,5.7c3.3-1.7,6.7-2.3,9.3-2.3
+                c4.3,0,4.6,1.5,4.6,3.2v0.6c-4.7,0.5-10.3,1.1-14.3,1.9c-1.6,2.1-2.1,4.1-2.1,6c0,5.6,4,8.4,9.2,8.4c3.2,0,6.1-0.8,7.9-2.5
+                c1.1,1.8,2.5,2.5,5,2.5c1.4,0,2.8-0.3,4.1-0.7v-5.2c-1.8,0-2.7,0-2.9-0.1C-26.8,21.1-27,20.6-27,19.7"></path>
+                        </g>
+                        <g id="g68" transform="translate(242.6758,34.8926)">
+                            <path class="header__logo-text-letter header__logo-text-letter_7 st0" id="path70" d="M-54.8,5.4l-10.1-15.9l-14.5,31.1h8.1l7.9-16.7l9,14.5l11-18.9l12,26.9h7.9l-18.9-42.9
+                L-54.8,5.4z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+            </div>
+            <div class="d-flex align-text-bottom" style="padding-top: 120px;margin-left: -430px;" >
+                  <button class="btn text-danger btn-custom fw-bold" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    sale
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Новинки
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Каталог
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Одежда
+                  </button>
+                  <button class="btn fw-bold btn-custom"  style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Обувь
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    туризм
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    альпинизм
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    бег
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    горные лыжи
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    сноуборд
+                  </button>
+                  <button class="btn fw-bold btn-custom" style="max-height: 28px; padding-right: 15px; letter-spacing: 0.4px;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    путешествия
+                  </button>
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+                    <a href="login.php">
+                    <button type="button" class="btn fw-bold" href="login.php" style=" padding-left: 80px;padding-top: 0px; max-height: 28px; letter-spacing: 0.4px;">
+                      вход
+                    </button>
+                  </a>
+                  </div>
+                  <div>
+                    <img src="picture/bag-1.svg" alt="Логотип" style="width: 32px; height: 51px; margin-left: 10px;padding-bottom: 20px;">
+                </div>
+                <div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="34px" height="28px" viewBox="1 0 32 28" stroke="#000" fill="none" style="margin-left: 10px;">
+                    <path fill-rule="evenodd" stroke-width="3" d="M17.002 26.177c.49-.324 1.028-.69 1.604-1.095a71.968 71.968 0 0 0 5.31-4.09c2.454-2.09 4.42-4.116 5.715-5.98.812-1.17 1.333-2.24 1.542-3.174l.039-.142a7.41 7.41 0 0 0 .375-2.324c0-2.26-.597-4.11-2.443-5.828-1.789-1.664-4.8-2.41-6.637-1.808-1.893.619-3.14 1.356-4.35 2.813l-1.152 1.386-1.154-1.384a7.596 7.596 0 0 0-5.852-2.74 7.591 7.591 0 0 0-3.662.939 7.557 7.557 0 0 0-3.924 6.622c0 .796.127 1.576.374 2.324l.039.142c.209.935.729 2.005 1.542 3.175 1.295 1.863 3.263 3.89 5.717 5.98a71.984 71.984 0 0 0 5.313 4.09c.577.404 1.115.77 1.604 1.094z"></path>
+                </svg>
+                </div>
+                <div>
+                  <img src="picture/za lupa.svg" alt="Логотип" style="width: 34px; height: 34px; margin-left: 10px;">
+                </div>
+                
+              </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto" style="margin-left: -655px; margin-top: 40px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Доставка и оплата</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Контакты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Сервис</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Блог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Клуб</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Youtube</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Fest</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Подкасты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">Парк</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: 12px; letter-spacing: 0.4px; margin-top: -60px; ">О магазине</a>
+                    </li>
+                </ul>
+            </div>
+        </div> 
+    </nav>  
+        <!-- Отступ для контента после навигационного бара -->
+    <div style="margin-top: 155px;"></div>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+          Некоторый заполнитель для компонента сворачивания. Эта панель по умолчанию скрыта, но открывается, когда пользователь активирует соответствующий триггер.
+        </div>
+      </div>
+      <p>
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb custom-breadcrumb" style="padding-left: 12px;">
+                <li class="breadcrumb-item link-secondary" style="font-size: 12px; letter-spacing: 0.5px;"><a href="#">Главная</a></li>
+                <li class="breadcrumb-item" style="font-size: 12px; letter-spacing: 0.5px;"><a href="#">Каталог</a></li>
+                <li class="breadcrumb-item" style="font-size: 12px; letter-spacing: 0.5px;"><a href="#">Альпинистское снаряжение</a></li>
+                <li class="breadcrumb-item" style="font-size: 12px; letter-spacing: 0.5px;"><a href="#">Страховочное снаряжение</a></li>
+                <li class="breadcrumb-item" style="font-size: 12px; letter-spacing: 0.5px;"><a href="#">Страховочные системы</a></li>
+                <li class="breadcrumb-item active" style="font-size: 12px; letter-spacing: 0.5px;" aria-current="page">Страховочная система Camp Impulse Orange</li>
+            </ol>
+          </nav>
+      </p>
+      <!-- столбец с картинками  -->
+      <div class="container">
+        <div class="row">
+            <!-- Первый столбец (705px) -->
+            <div class="col col-md-9" style="width: 705px;">
+                <!-- Здесь можете разместить контент для первого столбца -->
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-md-8" style="height: 70px; padding-left: 0px;">
+                                <div class="col-6 col-md-6 mb-3">
+                                    <img src="picture/1.webp" alt="Image 1" class="img-thumbnail" onmouseover="changeLargeImage('picture/11.webp')">
+                                </div>
+                                <div class="col-6 col-md-6 mb-3">
+                                    <img src="picture/2.webp" alt="Image 2" class="img-thumbnail" onmouseover="changeLargeImage('picture/22.jpg')">
+                                </div>
+                                <div class="col-6 col-md-6 mb-3">
+                                    <img src="picture/3.webp" alt="Image 3" class="img-thumbnail" onmouseover="changeLargeImage('picture/33.webp')">
+                                </div>
+                                <div class="col-6 col-md-6 mb-3">
+                                    <img src="picture/4.webp" alt="Image 4" class="img-thumbnail" onmouseover="changeLargeImage('picture/44.webp')">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-left: 90px; margin-top: -75px;">
+                        <div class="d-flex justify-content-center align-items-center" style="width: 380px; height: 380px; margin-left: 90px; background-color: #ffffff;">
+                            <img src="picture/11.webp" alt="Large Image" class="img-fluid" id="largeImage">
+                        </div>
+                    </div>
+                </div>
+                <h2 class="catalog-detail__info-section-title fw-bold" style="margin-top: 124px; font-size: 25px;">О товаре</h2>
+                <div class="catalog-detail__info-section-body">
+                    <p itemprop="description" class="fw-bold" style="font-size: 15px;">Модель Impulse — лучшая страховочная система CAMP для скалолазания. 
+                        <br><br>Отличительной особенностью стала совершенно новая конструкция пояса, сочетающая в себе перфорированный материал EVA и 3D подкладку. Как результат - система с отличным уровнем комфорта и вентиляции. 
+                        <br><br>Ножные обхваты так же не оказались без внимания инженеров. Простая, но очень эффективная конструкция в виде треугольного каркаса обеспечат должный уровень комфорта при срывах и зависаниях. Стальная регулируемая пряжка обратного хода поможет точно отрегулировать пояс.
+                        <br><br>Четыре развесочных петли имеют жёсткий каркас для удобного расположения снаряжения. Сзади расположена пятая петля, куда удобно подстегнуть запасное снаряжение, вторую веревку или мешок с магнезией.
+                        <br><br>    • инновационная технология пояса для большего комфорта;
+                        <br>    • перфорированная EVA подкладка обеспечивает превосходную вентиляцию;
+                        <br>    • стальная пряжка doubleback на поясе;<br>    • нерегулируемые ножные обхваты;
+                        <br>    • конструкция ножных обхватов DeltaFrame повышает комфорт при зависаниях;
+                        <br>    • 4 жёсткие петли для снаряжения;
+                        <br>    • силовая петля сзади для вспомогательного снаряжения;
+                        <br>    • вес 355 г для размера М;
+                        <br>    • обхват пояса, см: XS 62-72, S 69-79, M 76-86, L 83-93;
+                        <br>    • обхват ножных ремней, см: XS 48-52, S 52-56, M 56-60, L 60-64. 
+                    </p>
+                </div>
+                <h2 class="fw-bold" style="font-size: 20px; padding-top: 40px;">Характеристики</h2>
+
+
+                 <div class="container" style="padding-left: 0px;">
+                    <div class="row">
+                      <div class="col-sm" style="padding-left: 12px; margin-top: -20px;">
+                        <div class="container mt-5" style="padding-left: 0px;">
+                            <div class="row">
+                                <div class="col" style="padding-left: 12px;">
+                                    <div class="text-container fw-bold">
+                                        <p style="text-align: left; ">Вес(кг).
+                                        <p style="text-align: left;">Тип
+                                        <p style="text-align: left;">Количество пряжек
+                                        <p style="text-align: left;">Слоты под кэритулы
+                                        <p style="text-align: left;">Тип страховочной системы
+                                        <p style="text-align: left;">Сезон
+                                        <p style="text-align: left;">Пол
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-sm" style="margin-top: -20px;">
+                        <div class="container mt-5" style="padding-left: 0px;">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="text-container" style="margin-right: 100px;">
+                                        <p style="text-align: left;">0,355
+                                        <p style="text-align: left;">Страховочная система
+                                        <p style="text-align: left;">1
+                                        <p style="text-align: left;">Нет
+                                        <p style="text-align: left;">Нижняя
+                                        <p style="text-align: left;">23
+                                        <p style="text-align: left;">Унисекс
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h2 class="catalog-detail__info-section-title fw-bold" style=" font-size: 25px;margin-top: 60px;">О бренде</h2>
+
+                  <a href="/brands/camp/" class="text-start fw-bold text-dark">Camp</a>
+                  <div class="half-hidden" id="textContainer" >
+                    <p>Компания C.A.M.P. основана в 1889 году в маленьком городке Премана на севере Италии. Является одной из старейших компаний по производству снаряжения для самых разных видов активностей, связанных с деятельностью на высоте: альпинизм, туризм, скалолазание, промышленный альпинизм, трейл-раннинг и мультиспорт. Продукция CAMP, CAMP Safety и CASSIN производится на 9-ти фабриках в Европе, Азии и Африке. 80% производится на экспорт. 20% всех сотрудников работают в отделе исследования и разработок, чем обеспечивается большое количество собственных патентов и изобретений. Основная специализация – создание самых функциональных, легких и технологичных образцов снаряжения.</p>
+                    </div>
+                    <button class="btn" style="color: blue; padding-left: 0px;" id="toggleButton">Читать полностью v</button>
+            <!--  -->
+            </div>
+            <!-- Второй столбец (504px, статичный) -->
+            <div class="col-md-3" style="width: 504px; position: sticky; top: 0;">
+                <!-- Здесь можете разместить контент для второго столбца -->
+                <!-- Второй столбец будет статичным благодаря CSS-свойствам position: sticky; top: 0; -->
+                <div class="d-flex align-items-center sticky-top" style="height: 50px; margin-left: 38px;">
+                    <!-- Левая картинка -->
+                    <img src="picture/29ae8a8dac0daf62a33e11b3e981d4bd.webp" alt="Image 1" style="height: 50px; width: 46px; ">
+                    <!-- Две правые картинки -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="30px" viewBox="0 0 25 30" stroke="#000" style="margin-left: 300px;">
+                        <g fill="none" fill-rule="evenodd" stroke-width="3" transform="translate(2 2)">
+                            <path d="M17.714 3.633l-13.46 9.405 13.589 9.587"></path>
+                            <ellipse cx="17.294" cy="4.063" fill="#FFF" rx="4.118" ry="4.063"></ellipse>
+                            <ellipse cx="4.118" cy="13" fill="#FFF" rx="4.118" ry="4.063"></ellipse>
+                            <ellipse cx="17.294" cy="21.938" fill="#FFF" rx="4.118" ry="4.063"></ellipse>
+                        </g>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29px" height="25px" viewBox="1 0 32 28" stroke="#000" fill="none">
+                        <path fill-rule="evenodd" stroke-width="3" d="M17.002 26.177c.49-.324 1.028-.69 1.604-1.095a71.968 71.968 0 0 0 5.31-4.09c2.454-2.09 4.42-4.116 5.715-5.98.812-1.17 1.333-2.24 1.542-3.174l.039-.142a7.41 7.41 0 0 0 .375-2.324c0-2.26-.597-4.11-2.443-5.828-1.789-1.664-4.8-2.41-6.637-1.808-1.893.619-3.14 1.356-4.35 2.813l-1.152 1.386-1.154-1.384a7.596 7.596 0 0 0-5.852-2.74 7.591 7.591 0 0 0-3.662.939 7.557 7.557 0 0 0-3.924 6.622c0 .796.127 1.576.374 2.324l.039.142c.209.935.729 2.005 1.542 3.175 1.295 1.863 3.263 3.89 5.717 5.98a71.984 71.984 0 0 0 5.313 4.09c.577.404 1.115.77 1.604 1.094z"></path>
+                    </svg>
+                </div>
+                <h1 itemprop="name" class="fw-bold" style="font-size: 28px; margin-left: 38px; margin-top: 20px;">Страховочная система Camp Impulse Orange</h1>
+                <div class="d-flex">
+                <h1 itemprop="name" class="fw-bold text-danger" style="font-size: 60px; margin-left: 38px;">10 010  ₽</h1>
+                <h1 itemprop="name" class="fw-bold text-decoration-line-through" style="font-size: 26px; margin-top: 35px; margin-left: 10px;">14 300 ₽</h1>
+            </div>
+            <div class="d-flex">
+                <h1 itemprop="name" class="bg-danger text-light fs-5" style="font-size: 14px; margin-left: 38px;">-30%</h1>
+            </div>
+
+            <div class="d-flex">
+                <h1 itemprop="name" class="text-secondary text-decoration-underline" style="font-size: 15px; margin-left: 38px;">Сообщить о снижении цены</h1>
+            </div>
+            <div class="d-flex">
+                <h1 itemprop="name" class="text-secondary" style="font-size: 15px; margin-left: 38px; margin-top: 12px;">Код товара</h1>
+                <h1 itemprop="name" class="fw-bold text-dark" style="font-size: 15px; margin-left: 5px; margin-top: 12px;"> 2936</h1>
+            </div>
+            <div class="d-flex" style="margin-top: 25px;">
+                <h1 itemprop="name" class="text-secondary" style="font-size: 15px; margin-left: 40px; margin-right: 10px; margin-top: 10px ;">Цвет</h1>
+                <img src="picture/5188068ad9ad11eb80cc901b0e95a2a8_0f6598bce63d11eb80cf901b0e95a2a8.webp" alt="Image 1" style="height: 40px; width: 40px;">
+            </div>
+            <div class="d-flex">
+                <h1 itemprop="name" class="text-secondary" style="font-size: 15px; margin-left: 38px; margin-top: 30px;">размер</h1>
+                <h1 itemprop="name" class="fw-bold text-secondary" style="font-size: 15px; margin-left: 252px; margin-top: 30px;">Таблица размеров</h1>
+            </div>
+            <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group" style="margin-top:20px; margin-left: 40px;">
+
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1">⠀⠀XS⠀⠀</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">⠀⠀S⠀⠀</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio3">⠀⠀M⠀⠀</label>
+
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio3">⠀⠀L⠀⠀</label>
+              </div>
+            <div class="container mt-5">
+                <h1 itemprop="name" class="text-secondary" style="font-size: 16px; margin-left: 38px; margin-top: 40px;">Кол-во</h1>
+                <div class="row">
+                    <div class="col-2">
+                        <button id="decrement" class="btn btn-outline-dark btn-block" style="margin-left:140px; margin-top: -70px;">-</button>
+                    </div>
+                    <div class="col-8">
+                        <p id="count" class="text-center" style="margin-right: 0px; margin-top: -30px;">0</p>
+                    </div>
+                    <div class="col-2">
+                        <button id="increment" class="btn  btn-outline-dark btn-block" style="margin-top:-70px; margin-left: -120px;">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="d-grid gap-2  mx-auto" style="margin:left 80px; height: 60px; width: 475;">
+                <button class="btn btn-primary" type="button" style="margin-left: 40px;">В корнизу</button>
+              </div>
+              <div class="12" style="margin-top: 20px;"> 
+              </div>
+              <div class="d-grid gap-2 d-md-block" style="margin-left: 40px;">
+                <button class="btn btn-outline-primary" style="width: 215px; height: 61px;" type="button">К сравнению</button>
+                <button class="btn btn-outline-primary" style="width: 215px; height: 61px;" type="button">Посоветоваться
+                    с экспертом</button>
+              </div>
+
+            </div>
+            <!-- конец столбца 2 -->
+            </div>
+        </div>
+       </div>
+    </div>
+
+    <script>
+        function changeLargeImage(imageSrc) {
+            document.getElementById('largeImage').src = imageSrc;
+        }
+    </script>
+    <script>
+        const decrementButton = document.getElementById('decrement');
+        const incrementButton = document.getElementById('increment');
+        const countElement = document.getElementById('count');
+
+        let count = 0;
+
+        // Функция для увеличения счётчика
+        function incrementCount() {
+            count++;
+            countElement.textContent = count;
+        }
+
+        // Функция для уменьшения счётчика
+        function decrementCount() {
+            if (count > 0) {
+                count--;
+                countElement.textContent = count;
+            }
+        }
+
+        // Назначаем обработчики событий для кнопок
+        decrementButton.addEventListener('click', decrementCount);
+        incrementButton.addEventListener('click', incrementCount);
+    </script>
+    <script>
+        // JavaScript для установки ширины полосы равной длине слова
+        document.addEventListener('DOMContentLoaded', function() {
+          const btn = document.getElementById('customBtn');
+          const text = btn.textContent.trim(); // Убираем лишние пробелы в начале и конце
+          const textWidth = btn.getBoundingClientRect().width;
+          const textLength = text.length;
+    
+          const spaceWidth = textWidth / textLength;
+          const borderWidth = spaceWidth * 0.8; // Настройте это значение по вашему желанию
+    
+          const beforeElement = btn.querySelector('.btn-custom::before');
+          beforeElement.style.width = `${borderWidth}px`;
+        });
+      </script>
+  <script>
+    const textContainer = document.getElementById('textContainer');
+    const toggleButton = document.getElementById('toggleButton');
+    let isExpanded = false;
+
+    toggleButton.addEventListener('click', function () {
+      if (isExpanded) {
+        textContainer.classList.remove('full-visible');
+        toggleButton.textContent = 'Показать полностью v';
+        isExpanded = false;
+      } else {
+        textContainer.classList.add('full-visible');
+        toggleButton.textContent = 'Свернуть ^';
+        isExpanded = true;
+      }
+    });
+  </script>
+<script src="js/bootstrap.bundle.min.js"></script>
+</html>
